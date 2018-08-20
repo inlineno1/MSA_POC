@@ -1,0 +1,13 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*" # actuator endpoint activation
+
+spring:
+  application:
+    name: todo-service
+
+  cloud:
+    config:
+      uri: http://localhost:8888      
