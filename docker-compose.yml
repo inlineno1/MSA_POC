@@ -44,8 +44,8 @@ services:
       - MYSQL_PASSWORD=MCC_PASSWORD
       - MYSQL_ROOT_PASSWORD=MCC_PASSWORD
     volumes:
-      - ./data/mysqldb/conf:/etc/mysql/conf.d
-      - ./data/mysqldb/data:/var/lib/mysql
+      - mysqldb_conf:/etc/mysql/conf.d
+      - mysqldb_data:/var/lib/mysql
     privileged: true
     ports:
       - "3306:3306"
@@ -53,4 +53,8 @@ services:
       test: "/usr/bin/mysql --user=MCC_USER --password=MCC_PASSWORD --execute \"SHOW DATABASES;\""
       interval: 5s
       timeout: 5s
-      retries: 5 
+      retries: 5
+
+volumes:
+  mysqldb_conf:
+  mysqldb_data: 
