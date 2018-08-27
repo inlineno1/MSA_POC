@@ -10,6 +10,8 @@ services:
   config:
     image: config:latest
     restart: always
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
     ports:
       - 8888:8888
     healthcheck:
@@ -21,20 +23,44 @@ services:
   eureka:
     image: eureka:latest
     restart: always
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker    
     ports:
       - 8761:8761
     depends_on:
       config:
         condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8888/actuator/health"]
+      interval: 5s
+      timeout: 5s
+      retries: 5        
   
   gateway:
     image: gateway:latest
     restart: always
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
     ports:
       - 8081:8081
     depends_on:
       config:
         condition: service_healthy
+      eureka:
+        condition: service_healthy
+        
+  hystrix:
+    image: hystrix:latest
+    restart: always
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - 9000:9000
+    depends_on:
+      config:
+        condition: service_healthy
+      eureka:
+        condition: service_healthy        
 
   mysql:
     image: mysql:5.7.22
@@ -49,12 +75,12 @@ services:
     privileged: true
     ports:
       - "3306:3306"
-    healthcheck:
-      test: "/usr/bin/mysql --user=MCC_USER --password=MCC_PASSWORD --execute \"SHOW DATABASES;\""
-      interval: 5s
-      timeout: 5s
-      retries: 5
+#    healthcheck:
+#      test: "/usr/bin/mysql --user=MCC_USER --password=MCC_PASSWORD --execute \"SHOW DATABASES;\""
+#      interval: 5s
+#      timeout: 5s
+#      retries: 5
 
 volumes:
   mysqldb_conf:
-  mysqldb_data: 
+  mysqldb_data:

@@ -9,6 +9,7 @@
   	<module>gateway</module>
   	<module>todo-service</module>
   	<module>user-service</module>
+  	<module>hystrix</module>
   </modules>
   <artifactId>poc-parent</artifactId>
 </project>

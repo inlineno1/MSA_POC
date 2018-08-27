@@ -8,3 +8,6 @@ services:
 
   gateway:
     build: gateway
+    
+  hystrix:
+    build: hystrix
