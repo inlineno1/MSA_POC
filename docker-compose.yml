@@ -8,7 +8,7 @@ services:
       - 5672:5672
 
   config:
-    image: config:latest
+    image: mcc/config:latest
     restart: always
     environment:
       - SPRING_PROFILES_ACTIVE=docker
@@ -21,7 +21,7 @@ services:
       retries: 5
 
   eureka:
-    image: eureka:latest
+    image: mcc/eureka:latest
     restart: always
     environment:
       - SPRING_PROFILES_ACTIVE=docker    
@@ -37,7 +37,7 @@ services:
       retries: 5        
   
   gateway:
-    image: gateway:latest
+    image: mcc/gateway:latest
     restart: always
     environment:
       - SPRING_PROFILES_ACTIVE=docker
@@ -50,7 +50,7 @@ services:
         condition: service_healthy
         
   hystrix:
-    image: hystrix:latest
+    image: mcc/hystrix:latest
     restart: always
     environment:
       - SPRING_PROFILES_ACTIVE=docker
