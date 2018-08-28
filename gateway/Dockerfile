@@ -4,4 +4,4 @@ MAINTAINER james lee <inlineno1@gmail.com>
 ADD ./target/gateway.jar /app/
 CMD ["java", "-Xmx200m", "-jar", "/app/gateway.jar"]
 
-EXPOSE 8081
+EXPOSE 8080
