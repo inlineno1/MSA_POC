@@ -1,4 +1,4 @@
-package org.mycreditchain.user.config.swagger;
+package org.mycreditchain.eureka.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
