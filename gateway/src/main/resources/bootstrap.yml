@@ -1,5 +1,5 @@
 server:
-  port: ${PORT:8880}
+  port: ${PORT:8080}
 
 spring:
   application:
@@ -19,4 +19,4 @@ spring:
   profiles: docker
   cloud:
     config:
-      uri: http://${CONFIG_SERVER_URL:localhost}:${CONFIG_SERVER_PORT:8888}      
+      uri: http://config:${CONFIG_SERVER_PORT:8888}      

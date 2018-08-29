@@ -27,6 +27,8 @@ services:
       - SPRING_PROFILES_ACTIVE=docker    
     ports:
       - 8761:8761
+    links:
+      - config
     depends_on:
       config:
         condition: service_healthy
@@ -43,24 +45,12 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
     ports:
       - 8080:8080
+    links:
+      - eureka
+      - config      
     depends_on:
-      config:
-        condition: service_healthy
       eureka:
         condition: service_healthy
-        
-  hystrix:
-    image: mcc/hystrix:latest
-    restart: always
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-    ports:
-      - 9000:9000
-    depends_on:
-      config:
-        condition: service_healthy
-      eureka:
-        condition: service_healthy        
 
   mysql:
     image: mysql:5.7.22
