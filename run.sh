@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+git pull
+
 export PROJECT_PATH=/home/vagrant/MSA_POC
 export LOG_PATH=$PROJECT_PATH/logs
 
