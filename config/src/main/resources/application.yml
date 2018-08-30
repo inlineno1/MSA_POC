@@ -18,7 +18,7 @@ spring:
 
 ---
 spring:
-  profiles: docker
+  profiles: vm
   cloud:
     config:
       server:

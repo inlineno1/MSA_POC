@@ -5,6 +5,10 @@ git pull
 export PROJECT_PATH=/home/vagrant/MSA_POC
 export LOG_PATH=$PROJECT_PATH/logs
 
+sudo docker-compose up -d rabbitmq
+
+sudo docker-compose up -d mysql
+
 # log path create
 if [ ! -d $LOG_PATH ]; then
    mkdir $LOG_PATH;
