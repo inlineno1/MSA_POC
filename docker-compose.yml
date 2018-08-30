@@ -7,50 +7,50 @@ services:
       - 15672:15672
       - 5672:5672
 
-  config:
-    image: mcc/config:latest
-    restart: always
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-    ports:
-      - 8888:8888
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8888/actuator/health"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
+#  config:
+#    image: mcc/config:latest
+#    restart: always
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=docker
+#    ports:
+#      - 8888:8888
+#    healthcheck:
+#      test: ["CMD", "curl", "-f", "http://localhost:8888/actuator/health"]
+#      interval: 5s
+#      timeout: 5s
+#      retries: 5
 
-  eureka:
-    image: mcc/eureka:latest
-    restart: always
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker    
-    ports:
-      - 8761:8761
-    links:
-      - config
-    depends_on:
-      config:
-        condition: service_healthy
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8761/actuator/health"]
-      interval: 5s
-      timeout: 5s
-      retries: 5        
-  
-  gateway:
-    image: mcc/gateway:latest
-    restart: always
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-    ports:
-      - 8080:8080
-    links:
-      - eureka
-      - config      
-    depends_on:
-      eureka:
-        condition: service_healthy
+#  eureka:
+#    image: mcc/eureka:latest
+#    restart: always
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=docker    
+#    ports:
+#      - 8761:8761
+#    links:
+#      - config
+#    depends_on:
+#      config:
+#        condition: service_healthy
+#    healthcheck:
+#      test: ["CMD", "curl", "-f", "http://localhost:8761/actuator/health"]
+#      interval: 5s
+#      timeout: 5s
+#      retries: 5        
+#  
+#  gateway:
+#    image: mcc/gateway:latest
+#    restart: always
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=docker
+#    ports:
+#      - 8080:8080
+#    links:
+#      - eureka
+#      - config      
+#    depends_on:
+#      eureka:
+#        condition: service_healthy
 
   mysql:
     image: mysql:5.7.22
